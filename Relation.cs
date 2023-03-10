@@ -44,12 +44,6 @@ namespace Decision_making_theory
                     }
                 }
             }
-            List<List<int>> matrix = new List<List<int>>();
-
-            matrix.Add(new List<int> { 1, 2, 3 });
-            matrix.Add(new List<int> { 4, 5, 6 });
-            matrix.Add(new List<int> { 7, 8, 9 });
-            Console.WriteLine();
 
             return _resultMatrix;
         }        
