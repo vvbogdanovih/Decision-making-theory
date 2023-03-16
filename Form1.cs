@@ -54,6 +54,12 @@ namespace Decision_making_theory
             }
         }
 
+        private void ShowAnswer(bool answer)
+        {
+            if (answer) MessageBox.Show("Так");
+            else MessageBox.Show("Ні"); 
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // fill comboBox by possible matrix sizes
@@ -99,6 +105,8 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Обернене відношення");
             comboBox2.Items.Add("Композиція");
             comboBox2.Items.Add("Звуження");
+            comboBox2.Items.Add("Рефлексивна");
+            comboBox2.Items.Add("Антирефлексивна");
 
             comboBox2.Text = "Перетин";
         }
@@ -137,6 +145,15 @@ namespace Decision_making_theory
                 case "Звуження":
                     SetDataGridViewData(dataGridView4, binariRelation.Narrowing(matrixA, Convert.ToInt32(comboBox3.Text)));
                     break;
+                case "Рефлексивна":
+                    ShowAnswer(binariRelation.isReflective(matrixA));
+                    break;
+                case "Антирефлексивна":
+                    ShowAnswer(binariRelation.isAntiReflective(matrixA));
+                    break;
+                default: MessageBox.Show("Wrong argument!");
+                    break;
+
             }
 
         }

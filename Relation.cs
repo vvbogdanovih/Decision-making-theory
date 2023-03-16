@@ -17,7 +17,7 @@ namespace Decision_making_theory
         private int[,] _resultMatrix;
 
         public Relation() { }
-        //public Relation(int SIZE) => _SIZE = SIZE;
+        public Relation(int SIZE) => _SIZE = SIZE;
         /// <summary>
         /// matrixA, matrixB, matrix SIZE
         /// </summary>
@@ -28,8 +28,8 @@ namespace Decision_making_theory
         //    _SIZE = SIZE;
         //    _resultMatrix = new int[_SIZE, _SIZE];
         //}
-        public void SetMatrixA(int[,] matrixA) => _matrixA = matrixA;
-        public void SetMatrixB(int[,] matrixB) => _matrixA = matrixB;
+        //public void SetMatrixA(int[,] matrixA) => _matrixA = matrixA;
+        //public void SetMatrixB(int[,] matrixB) => _matrixA = matrixB;
 
         public int[,] Intersection(int[,] matrixA, int[,] matrixB)
         {
@@ -101,13 +101,13 @@ namespace Decision_making_theory
             }
             return _resultMatrix;
         }
-        public int[,] Addition(int[,] matrixA)
+        public int[,] Addition(int[,] matrix)
         {
-            _resultMatrix = new int[matrixA.GetLength(0), matrixA.GetLength(1)];
-            for (int i = 0; i < matrixA.GetLength(0); i++){
-                for (int j = 0; j < matrixA.GetLength(1); j++)
+            _resultMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
+            for (int i = 0; i < matrix.GetLength(0); i++){
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    if (matrixA[i, j] == 1)
+                    if (matrix[i, j] == 1)
                     {
                         _resultMatrix[i, j] = 0;
                     }
@@ -119,14 +119,14 @@ namespace Decision_making_theory
             }
             return _resultMatrix;
         }
-        public int[,] InverseRelation(int[,] matrixA)
+        public int[,] InverseRelation(int[,] matrix)
         {
-            _resultMatrix = new int[matrixA.GetLength(0), matrixA.GetLength(1)];
-            for (int i = 0; i < matrixA.GetLength(0); i++)
+            _resultMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < matrixA.GetLength(1); j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    _resultMatrix[i, j] = matrixA[j, i];
+                    _resultMatrix[i, j] = matrix[j, i];
                 }
             }
             return _resultMatrix;
@@ -148,14 +148,14 @@ namespace Decision_making_theory
             }
             return _resultMatrix;
         }
-        public int[,] Narrowing(int[,] matrixA, int size)
+        public int[,] Narrowing(int[,] matrix, int size)
         {
             _resultMatrix = new int[size, size];
 
             for (int i = 0; i < size; i++) { 
                 for(int j = 0; j < size; j++)
                 {
-                    _resultMatrix[i,j] = matrixA[i, j];
+                    _resultMatrix[i,j] = matrix[i, j];
                 }
             }
 
@@ -163,9 +163,22 @@ namespace Decision_making_theory
         }
 
 
-        public bool isReflective()
+        public bool isReflective(int[,] matrix)
         {
-
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                if(matrix[i,i] != 1)
+                    return false;                
+            }
+            return true;
+        }
+        public bool isAntiReflective(int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                if (matrix[i, i] != 0)
+                    return false;
+            }
             return true;
         }
     }
