@@ -112,6 +112,8 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Асиметрична");
             comboBox2.Items.Add("Антисиметрична");
             comboBox2.Items.Add("Транзитивне");
+            comboBox2.Items.Add("Транзитивне замикання");
+            comboBox2.Items.Add("Ациклічне");
 
             comboBox2.Text = "Перетин";
         }
@@ -166,6 +168,12 @@ namespace Decision_making_theory
                 case "Транзитивне":
                     ShowAnswer(Relation.isTransitive(matrixA));
                     break;
+                case "Транзитивне замикання":
+                    SetDataGridViewData(dataGridView4, Relation.TransitiveClosure(matrixA));
+                    break;
+                case "Ациклічне":
+                    ShowAnswer(Relation.isAcyclicity(matrixA));
+                    break;
                 default: MessageBox.Show("Wrong argument!");
                     break;
 
@@ -206,7 +214,6 @@ namespace Decision_making_theory
                 SetDataGridViewData(dataGridView3, matrix);
             }
         }
-
         // Singl
         private void button2_Click(object sender, EventArgs e)
         {
@@ -229,7 +236,6 @@ namespace Decision_making_theory
                 SetDataGridViewData(dataGridView3, matrix);
             }
         }
-
         // Rundom
         private void button3_Click(object sender, EventArgs e)
         {
@@ -254,7 +260,6 @@ namespace Decision_making_theory
             }
 
         }
-
         // Diagonal
         private void button4_Click(object sender, EventArgs e)
         {
@@ -280,7 +285,6 @@ namespace Decision_making_theory
                 SetDataGridViewData(dataGridView3, matrix);
             }
         }
-
         // AntiDiagonl
         private void button5_Click(object sender, EventArgs e)
         {

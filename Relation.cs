@@ -15,6 +15,28 @@ namespace Decision_making_theory
         private int[,] _matrixA;
         private int[,] _matrixB;
         private static int[,] _resultMatrix;
+        private int[,] U =
+        {
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1},
+            {1,1,1,1,1,1,1,1}
+        };
+        private int[,] E =
+        {
+            {1,0,0,0,0,0,0,0 },
+            {0,1,0,0,0,0,0,0 },
+            {0,0,1,0,0,0,0,0 },
+            {0,0,0,1,0,0,0,0 },
+            {0,0,0,0,1,0,0,0 },
+            {0,0,0,0,0,1,0,0 },
+            {0,0,0,0,0,0,1,0 },
+            {0,0,0,0,0,0,0,1 }
+        };
 
         public Relation() { }
         public Relation(int SIZE) => _SIZE = SIZE;
@@ -103,6 +125,16 @@ namespace Decision_making_theory
             }
             return result;
         } 
+        public static bool isEmpty(int[,] matrix)
+        {
+            for(int i = 0; i < matrix.GetLength(0); i++){
+                for( int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if(matrix[i, j] != 0) return false;
+                }
+            }
+            return true;
+        }
         // Lab1
         public static int[,] Intersection(int[,] matrixA, int[,] matrixB)
         {
@@ -334,7 +366,8 @@ namespace Decision_making_theory
             // Якщо усі умови транзитивності виконуються, то відношення транзитивне
             return true;
         }
-
-
+        public static int[,] TransitiveClosure(int[,] matrix) => Composition(matrix, matrix);
+        public static bool isAcyclicity(int[,] matrix) => isEmpty(Intersection(Composition(matrix, matrix),InverseMatrix(matrix)));
+        
     }
 }
