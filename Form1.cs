@@ -105,8 +105,13 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Обернене відношення");
             comboBox2.Items.Add("Композиція");
             comboBox2.Items.Add("Звуження");
+            // Lab2
             comboBox2.Items.Add("Рефлексивна");
             comboBox2.Items.Add("Антирефлексивна");
+            comboBox2.Items.Add("Симетрична");
+            comboBox2.Items.Add("Асиметрична");
+            comboBox2.Items.Add("Антисиметрична");
+            comboBox2.Items.Add("Транзитивне");
 
             comboBox2.Text = "Перетин";
         }
@@ -115,41 +120,51 @@ namespace Decision_making_theory
         private void button6_Click(object sender, EventArgs e)
         {
             int[,] matrixA = GetDataGridViewData(dataGridView1);
-            int[,] matrixB = GetDataGridViewData(dataGridView2);
+            int[,] matrixB = GetDataGridViewData(dataGridView2);            
             
-            Relation binariRelation = new Relation();
-
             switch (comboBox2.Text)
             {
                 case "Перетин":
-                    SetDataGridViewData(dataGridView4, binariRelation.Intersection(matrixA, matrixB));
+                    SetDataGridViewData(dataGridView4, Relation.Intersection(matrixA, matrixB));
                     break;
                 case "Об'єднання":
-                    SetDataGridViewData(dataGridView4, binariRelation.Union(matrixA, matrixB));
+                    SetDataGridViewData(dataGridView4, Relation.Union(matrixA, matrixB));
                     break;
                 case "Різниця":
-                    SetDataGridViewData(dataGridView4, binariRelation.Subtraction(matrixA, matrixB));
+                    SetDataGridViewData(dataGridView4, Relation.Subtraction(matrixA, matrixB));
                     break;
                 case "Симетрична різниця":
-                    SetDataGridViewData(dataGridView4, binariRelation.SymmetricSubtraction(matrixA, matrixB));
+                    SetDataGridViewData(dataGridView4, Relation.SymmetricSubtraction(matrixA, matrixB));
                     break;
                 case "Доповнення":
-                    SetDataGridViewData(dataGridView4, binariRelation.Addition(matrixA));
+                    SetDataGridViewData(dataGridView4, Relation.Addition(matrixA));
                     break;
                 case "Обернене відношення":
-                    SetDataGridViewData(dataGridView4, binariRelation.InverseRelation(matrixA));
+                    SetDataGridViewData(dataGridView4, Relation.InverseRelation(matrixA));
                     break;
                 case "Композиція":
-                    SetDataGridViewData(dataGridView4, binariRelation.Composition(matrixA, matrixB));
+                    SetDataGridViewData(dataGridView4, Relation.Composition(matrixA, matrixB));
                     break;
                 case "Звуження":
-                    SetDataGridViewData(dataGridView4, binariRelation.Narrowing(matrixA, Convert.ToInt32(comboBox3.Text)));
+                    SetDataGridViewData(dataGridView4, Relation.Narrowing(matrixA, Convert.ToInt32(comboBox3.Text)));
                     break;
                 case "Рефлексивна":
-                    ShowAnswer(binariRelation.isReflective(matrixA));
+                    ShowAnswer(Relation.isReflective(matrixA));
                     break;
                 case "Антирефлексивна":
-                    ShowAnswer(binariRelation.isAntiReflective(matrixA));
+                    ShowAnswer(Relation.isAntiReflective(matrixA));
+                    break;
+                case "Симетрична":
+                    ShowAnswer(Relation.isSymmetric(matrixA));
+                    break;
+                case "Асиметрична":
+                    ShowAnswer(Relation.isASymmetric(matrixA));
+                    break;
+                case "Антисиметрична":
+                    ShowAnswer(Relation.isAntiSymmetric(matrixA));
+                    break;
+                case "Транзитивне":
+                    ShowAnswer(Relation.isTransitive(matrixA));
                     break;
                 default: MessageBox.Show("Wrong argument!");
                     break;
