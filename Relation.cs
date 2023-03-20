@@ -380,5 +380,8 @@ namespace Decision_making_theory
                 }
             }return true;
         }
+        public static int[,] SymmetricalComponent(int[,] matrix) => Intersection(matrix, InverseMatrix(matrix));
+        public static int[,] ASymmetricalComponent(int[,] matrix) => Subtraction(matrix, SymmetricalComponent(matrix));
+
     }
 }

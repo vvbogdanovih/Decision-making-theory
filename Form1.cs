@@ -114,6 +114,9 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Транзитивне");
             comboBox2.Items.Add("Транзитивне замикання");
             comboBox2.Items.Add("Ациклічне");
+            comboBox2.Items.Add("Зв'язне");
+            comboBox2.Items.Add("Симетрична складова");
+            comboBox2.Items.Add("АСиметрична складова");
 
             comboBox2.Text = "Перетин";
         }
@@ -173,6 +176,15 @@ namespace Decision_making_theory
                     break;
                 case "Ациклічне":
                     ShowAnswer(Relation.isAcyclicity(matrixA));
+                    break;
+                case "Зв'язне":
+                    ShowAnswer(Relation.isConnected(matrixA));
+                    break;
+                case "Симетрична складова":
+                    SetDataGridViewData(dataGridView4, Relation.SymmetricalComponent(matrixA));
+                    break;
+                case "АСиметрична складова":
+                    SetDataGridViewData(dataGridView4, Relation.ASymmetricalComponent(matrixA));
                     break;
                 default: MessageBox.Show("Wrong argument!");
                     break;
