@@ -15,7 +15,7 @@ namespace Decision_making_theory
         private int[,] _matrixA;
         private int[,] _matrixB;
         private static int[,] _resultMatrix;
-        private int[,] U =
+        private static int[,] _U =
         {
             {1,1,1,1,1,1,1,1},
             {1,1,1,1,1,1,1,1},
@@ -26,7 +26,7 @@ namespace Decision_making_theory
             {1,1,1,1,1,1,1,1},
             {1,1,1,1,1,1,1,1}
         };
-        private int[,] E =
+        private static int[,] _E =
         {
             {1,0,0,0,0,0,0,0 },
             {0,1,0,0,0,0,0,0 },
@@ -368,6 +368,17 @@ namespace Decision_making_theory
         }
         public static int[,] TransitiveClosure(int[,] matrix) => Composition(matrix, matrix);
         public static bool isAcyclicity(int[,] matrix) => isEmpty(Intersection(Composition(matrix, matrix),InverseMatrix(matrix)));
-        
+        public static bool isConnected(int[,] matrix)
+        {
+            int[,] tmp1 = Subtraction(Union(matrix, InverseMatrix(matrix)), _E);
+            int[,] tmp2 = Subtraction(_U, _E);
+            for(int i = 0; i < tmp1.GetLength(0); i++)
+            {
+                for(int j = 0; j < tmp2.GetLength(0); j++)
+                {
+                    if (tmp1[i, j] != tmp2[i, j]) return false;
+                }
+            }return true;
+        }
     }
 }
