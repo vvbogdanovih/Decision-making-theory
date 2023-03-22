@@ -382,6 +382,14 @@ namespace Decision_making_theory
         }
         public static int[,] SymmetricalComponent(int[,] matrix) => Intersection(matrix, InverseMatrix(matrix));
         public static int[,] ASymmetricalComponent(int[,] matrix) => Subtraction(matrix, SymmetricalComponent(matrix));
+        public static bool isTolerant(int[,] matrix) => isReflective(matrix) && isSymmetric(matrix);
+        public static bool isEquivalent(int[,] matrix) => isReflective(matrix) && isSymmetric(matrix) && isTransitive(matrix);
+        public static bool isQuasi_order(int[,] matrix) => isReflective(matrix) && isTransitive(matrix);
+        public static bool isOrder(int[,] matrix) => isReflective(matrix) && isTransitive(matrix) && isAntiSymmetric(matrix);
+        public static int[,] Attainability(int[,] matrix) => Union(_E, TransitiveClosure(matrix));
+        public static int[,] MutualAttainability(int[,] matrix) => Intersection(Attainability(matrix), InverseMatrix(Attainability(matrix)));
+
+
 
     }
 }

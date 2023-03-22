@@ -117,6 +117,12 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Зв'язне");
             comboBox2.Items.Add("Симетрична складова");
             comboBox2.Items.Add("АСиметрична складова");
+            comboBox2.Items.Add("Толерантність");
+            comboBox2.Items.Add("Еквівалентність");
+            comboBox2.Items.Add("Квазіпорядок");
+            comboBox2.Items.Add("Порядок");
+            comboBox2.Items.Add("Досяжність");
+            comboBox2.Items.Add("Взаємна досяжність");
 
             comboBox2.Text = "Перетин";
         }
@@ -185,6 +191,24 @@ namespace Decision_making_theory
                     break;
                 case "АСиметрична складова":
                     SetDataGridViewData(dataGridView4, Relation.ASymmetricalComponent(matrixA));
+                    break;
+                case "Толерантність":
+                    
+                    break;
+                case "Еквівалентність":
+
+                    break;
+                case "Квазіпорядок":
+
+                    break;
+                case "Порядок":
+
+                    break;
+                case "Досяжність":
+
+                    break;
+                case "Взаємна досяжність":
+
                     break;
                 default: MessageBox.Show("Wrong argument!");
                     break;
