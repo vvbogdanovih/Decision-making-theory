@@ -193,23 +193,23 @@ namespace Decision_making_theory
                     SetDataGridViewData(dataGridView4, Relation.ASymmetricalComponent(matrixA));
                     break;
                 case "Толерантність":
-                    
+                    ShowAnswer(Relation.isEquivalent(matrixA));
                     break;
                 case "Еквівалентність":
-
+                    ShowAnswer(Relation.isEquivalent(matrixA));
                     break;
                 case "Квазіпорядок":
-
+                    ShowAnswer(Relation.isQuasi_order(matrixA));
                     break;
                 case "Порядок":
-
+                    ShowAnswer(Relation.isOrder(matrixA));
                     break;
                 case "Досяжність":
-
+                    SetDataGridViewData(dataGridView4, Relation.Attainability(matrixA));
                     break;
                 case "Взаємна досяжність":
-
-                    break;
+                    SetDataGridViewData(dataGridView4, Relation.MutualAttainability(matrixA));
+                    break;                    
                 default: MessageBox.Show("Wrong argument!");
                     break;
 

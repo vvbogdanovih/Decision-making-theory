@@ -15,28 +15,9 @@ namespace Decision_making_theory
         private int[,] _matrixA;
         private int[,] _matrixB;
         private static int[,] _resultMatrix;
-        private static int[,] _U =
-        {
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1},
-            {1,1,1,1,1,1,1,1}
-        };
-        private static int[,] _E =
-        {
-            {1,0,0,0,0,0,0,0 },
-            {0,1,0,0,0,0,0,0 },
-            {0,0,1,0,0,0,0,0 },
-            {0,0,0,1,0,0,0,0 },
-            {0,0,0,0,1,0,0,0 },
-            {0,0,0,0,0,1,0,0 },
-            {0,0,0,0,0,0,1,0 },
-            {0,0,0,0,0,0,0,1 }
-        };
+        private static int[,] _U;
+        private static int[,] _E;
+        
 
         public Relation() { }
         public Relation(int SIZE) => _SIZE = SIZE;
@@ -52,7 +33,38 @@ namespace Decision_making_theory
         //}
         //public void SetMatrixA(int[,] matrixA) => _matrixA = matrixA;
         //public void SetMatrixB(int[,] matrixB) => _matrixA = matrixB;
-
+        
+        private static int[,] GetEMatrix(int size)
+        {
+            if(size < 1) return null;
+            _E = new int[size, size];
+            for(int i = 0; i < size; i++)
+            {
+                for(int j = 0; j < size; j++)
+                {
+                    if(i== j)
+                    {
+                        _E[i,j] = 1;
+                    }
+                    else
+                    {
+                        _E[i,j] = 0;
+                    }
+                }
+            }
+            return _E;
+        }
+        private static int[,] GetUMatrix(int size)
+        {
+            if (size < 1) return null;
+            _U = new int[size, size];
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                    _U[i, j] = 1;
+            }
+            return _E;
+        }
         public static int[,] InverseMatrix(int[,] matrix)
         {
             int n = matrix.GetLength(0);
@@ -370,8 +382,8 @@ namespace Decision_making_theory
         public static bool isAcyclicity(int[,] matrix) => isEmpty(Intersection(Composition(matrix, matrix),InverseMatrix(matrix)));
         public static bool isConnected(int[,] matrix)
         {
-            int[,] tmp1 = Subtraction(Union(matrix, InverseMatrix(matrix)), _E);
-            int[,] tmp2 = Subtraction(_U, _E);
+            int[,] tmp1 = Subtraction(Union(matrix, InverseMatrix(matrix)), GetEMatrix(matrix.GetLength(0)));
+            int[,] tmp2 = Subtraction(GetUMatrix(matrix.GetLength(0)), GetEMatrix(matrix.GetLength(0)));
             for(int i = 0; i < tmp1.GetLength(0); i++)
             {
                 for(int j = 0; j < tmp2.GetLength(0); j++)
@@ -386,7 +398,7 @@ namespace Decision_making_theory
         public static bool isEquivalent(int[,] matrix) => isReflective(matrix) && isSymmetric(matrix) && isTransitive(matrix);
         public static bool isQuasi_order(int[,] matrix) => isReflective(matrix) && isTransitive(matrix);
         public static bool isOrder(int[,] matrix) => isReflective(matrix) && isTransitive(matrix) && isAntiSymmetric(matrix);
-        public static int[,] Attainability(int[,] matrix) => Union(_E, TransitiveClosure(matrix));
+        public static int[,] Attainability(int[,] matrix) => Union(GetEMatrix(matrix.GetLength(0)), TransitiveClosure(matrix));
         public static int[,] MutualAttainability(int[,] matrix) => Intersection(Attainability(matrix), InverseMatrix(Attainability(matrix)));
 
 
