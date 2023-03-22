@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Decision_making_theory
 {
@@ -110,7 +111,16 @@ namespace Decision_making_theory
                 int divValue = B[i, i];
                 for (int j = i; j < 2 * n; j++)
                 {
-                    B[i, j] /= divValue;
+                    try
+                    {
+                        B[i, j] /= divValue;
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Неможливо провести операцію. Матриця невиражена/сингулярна");
+                        return null;
+                    }
+                    
                 }
                 // Віднімаємо i-тий рядок від інших рядків, щоб отримати 0 на всіх елементах, крім діагоналі
                 for (int j = 0; j < n; j++)
@@ -150,6 +160,7 @@ namespace Decision_making_theory
         // Lab1
         public static int[,] Intersection(int[,] matrixA, int[,] matrixB)
         {
+            if (matrixA == null || matrixB == null) return null;
             _resultMatrix = new int[matrixA.GetLength(0), matrixA.GetLength(1)];
             for (int i = 0; i < matrixA.GetLength(0); i++){
                 for(int j = 0; j < matrixA.GetLength(1); j++)
@@ -186,6 +197,7 @@ namespace Decision_making_theory
         }
         public static int[,] Subtraction(int[,] matrixA, int[,] matrixB)
         {
+            if (matrixA == null || matrixB == null) return null;
             _resultMatrix = new int[matrixA.GetLength(0), matrixA.GetLength(1)];
             for (int i = 0; i < matrixA.GetLength(0); i++){
                 for (int j = 0; j < matrixA.GetLength(1); j++)

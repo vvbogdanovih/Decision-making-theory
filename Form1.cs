@@ -42,6 +42,7 @@ namespace Decision_making_theory
         /// </summary>
         private void SetDataGridViewData(DataGridView dataGridView, int[,] matrix)
         {
+            if (matrix == null) return;
             int size = matrix.GetLength(0);
             dataGridView4.RowCount = size;
             dataGridView4.ColumnCount = size;
