@@ -313,7 +313,7 @@ namespace Decision_making_theory
         public static bool isSymmetric(int[,] matrix)
         {
             for (int i = 0; i < matrix.GetLength(0); i++){
-                for (int j = i + 1; j < matrix.GetLength(1); j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (matrix[i, j] != matrix[j, i]) return false;
                 }
@@ -346,16 +346,12 @@ namespace Decision_making_theory
                 {
                     if (i == j)
                     {
-                        // елементи на головній діагоналі мають бути нулями
-                        if (matrix[i, j] != 0)
-                        {
-                            return false;
-                        }
+                        continue;
                     }
                     else
                     {
                         // перевірка антисиметричності
-                        if (matrix[i, j] != -matrix[j, i])
+                        if (matrix[i, j] == matrix[j, i])
                         {
                             return false;
                         }
