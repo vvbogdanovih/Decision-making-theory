@@ -322,9 +322,13 @@ namespace Decision_making_theory
         }
         public static bool isASymmetric(int[,] matrix)
         {
+            for(int i = 0; i < matrix.GetLength(0); i++)
+            {
+                if(matrix[i, i] != 0) return false;
+            }
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = i + 1; j < matrix.GetLength(1); j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (matrix[i, j] != matrix[j, i]) return true;
                 }
