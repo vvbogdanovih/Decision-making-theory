@@ -194,7 +194,7 @@ namespace Decision_making_theory
                     SetDataGridViewData(dataGridView4, Relation.ASymmetricalComponent(matrixA));
                     break;
                 case "Толерантність":
-                    ShowAnswer(Relation.isEquivalent(matrixA));
+                    ShowAnswer(Relation.isTolerant(matrixA));
                     break;
                 case "Еквівалентність":
                     ShowAnswer(Relation.isEquivalent(matrixA));

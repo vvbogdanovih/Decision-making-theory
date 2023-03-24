@@ -64,88 +64,20 @@ namespace Decision_making_theory
                 for (int j = 0; j < size; j++)
                     _U[i, j] = 1;
             }
-            return _E;
+            return _U;
         }
         public static int[,] InverseMatrix(int[,] matrix)
         {
-            int n = matrix.GetLength(0);
-            int[,] B = new int[n, 2 * n]; // Розширена матриця, що містить одиничну матрицю
 
-            // Заповнюємо початкові значення розширеної матриці
-            for (int i = 0; i < n; i++)
+            _resultMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    B[i, j] = matrix[i, j];
-                }
-                B[i, i + n] = 1;
-            }
-
-            // Виконуємо послідовність елементарних операцій над матрицями
-            for (int i = 0; i < n; i++)
-            {
-                // Знаходимо максимальний елемент у стовпці i
-                int maxRow = i;
-                int maxValue = B[i, i];
-                for (int j = i + 1; j < n; j++)
-                {
-                    if (Math.Abs(B[j, i]) > Math.Abs(maxValue))
-                    {
-                        maxRow = j;
-                        maxValue = B[j, i];
-                    }
-                }
-
-                // Обмінюємо рядки, якщо максимальний елемент не перший
-                if (maxRow != i)
-                {
-                    for (int j = i; j < 2 * n; j++)
-                    {
-                        int temp = B[i, j];
-                        B[i, j] = B[maxRow, j];
-                        B[maxRow, j] = temp;
-                    }
-                }
-
-                // Ділимо рядок i на B[i,i], щоб отримати 1 на діагоналі
-                int divValue = B[i, i];
-                for (int j = i; j < 2 * n; j++)
-                {
-                    try
-                    {
-                        B[i, j] /= divValue;
-                    }
-                    catch 
-                    {
-                        MessageBox.Show("Неможливо провести операцію. Матриця невиражена/сингулярна");
-                        return null;
-                    }
-                    
-                }
-                // Віднімаємо i-тий рядок від інших рядків, щоб отримати 0 на всіх елементах, крім діагоналі
-                for (int j = 0; j < n; j++)
-                {
-                    if (i != j)
-                    {
-                        int mulValue = B[j, i];
-                        for (int k = i; k < 2 * n; k++)
-                        {
-                            B[j, k] -= mulValue * B[i, k];
-                        }
-                    }
+                    _resultMatrix[i, j] = matrix[j, i];
                 }
             }
-
-            // Повертаємо зворотню матрицю
-            int[,] result = new int[n, n];
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    result[i, j] = B[i, j + n];
-                }
-            }
-            return result;
+            return _resultMatrix;
         } 
         public static bool isEmpty(int[,] matrix)
         {
@@ -337,6 +269,8 @@ namespace Decision_making_theory
         }
         public static bool isAntiSymmetric(int[,] matrix)
         {
+            _resultMatrix = Intersection(matrix, InverseMatrix(matrix));
+
             int rows = matrix.GetLength(0);
             int cols = matrix.GetLength(1);
             if (rows != cols)
@@ -355,13 +289,14 @@ namespace Decision_making_theory
                     else
                     {
                         // перевірка антисиметричності
-                        if (matrix[i, j] == matrix[j, i])
+                        if (_resultMatrix[i, j] != 0)
                         {
                             return false;
                         }
                     }
                 }
             }
+            
             // якщо програма не виявила жодної помилки, то матриця є антисиметричною
             return true;
         }
