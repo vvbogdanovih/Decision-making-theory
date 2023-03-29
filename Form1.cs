@@ -106,6 +106,7 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Обернене відношення");
             comboBox2.Items.Add("Композиція");
             comboBox2.Items.Add("Звуження");
+            comboBox2.Items.Add("------------------------------------------------");
             // Lab2
             comboBox2.Items.Add("Рефлексивна");
             comboBox2.Items.Add("Антирефлексивна");
@@ -124,6 +125,10 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Порядок");
             comboBox2.Items.Add("Досяжність");
             comboBox2.Items.Add("Взаємна досяжність");
+            comboBox2.Items.Add("------------------------------------------------");
+
+            // Lab3
+            comboBox2.Items.Add("Адитивно транзитивне");
 
             comboBox2.Text = "Перетин";
         }
@@ -159,7 +164,7 @@ namespace Decision_making_theory
             }
 
 
-
+            if (comboBox2.Text != "------------------------------------------------")
             switch (comboBox2.Text)
             {
                 case "Перетин":
@@ -236,7 +241,11 @@ namespace Decision_making_theory
                     break;
                 case "Взаємна досяжність":
                     SetDataGridViewData(dataGridView4, Relation.MutualAttainability(matrixA));
-                    break;                    
+                    break;
+                case "Адитивно транзитивне":
+                        ShowAnswer(Relation.isAdditiveTransitive(matrixA));
+                    break;
+
                 default: MessageBox.Show("Wrong argument!");
                     break;
 

@@ -350,7 +350,29 @@ namespace Decision_making_theory
         public static int[,] MutualAttainability(int[,] matrix) => Intersection(Attainability(matrix), InverseMatrix(Attainability(matrix)));
 
         //Lab3
+        public static bool isAdditiveTransitive(int[,] matrix)
+        {
+            int tmp = 0;
 
+            for(int i = 0;  i < matrix.GetLength(0); i++)
+            {
+                for(int k = 0;  k < matrix.GetLength(0); k++)
+                {
+                    for(int j = 0;  j < matrix.GetLength(0); j++)
+                    {
+                        if (matrix[i,j] !=0 && matrix[j,k] != 0)
+                        {
+                            tmp = matrix[i, j] + matrix[j, k];
+                            if (tmp != matrix[i, k])
+                            {
+                                return false;
+                            }
+                        }
+                    }   
+                }
+            }
+            return true;
+        }
 
     }
 }

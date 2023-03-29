@@ -235,34 +235,38 @@
             // 
             // domainUpDown1
             // 
+            this.domainUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.domainUpDown1.Location = new System.Drawing.Point(16, 625);
             this.domainUpDown1.Name = "domainUpDown1";
-            this.domainUpDown1.Size = new System.Drawing.Size(72, 22);
+            this.domainUpDown1.Size = new System.Drawing.Size(72, 30);
             this.domainUpDown1.TabIndex = 13;
             this.domainUpDown1.Text = "domainUpDown1";
             // 
             // domainUpDown2
             // 
+            this.domainUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.domainUpDown2.Location = new System.Drawing.Point(94, 625);
             this.domainUpDown2.Name = "domainUpDown2";
-            this.domainUpDown2.Size = new System.Drawing.Size(72, 22);
+            this.domainUpDown2.Size = new System.Drawing.Size(72, 30);
             this.domainUpDown2.TabIndex = 14;
             this.domainUpDown2.Text = "domainUpDown2";
             // 
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(288, 625);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(668, 24);
+            this.comboBox2.Size = new System.Drawing.Size(668, 33);
             this.comboBox2.TabIndex = 16;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1346, 625);
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button6.Location = new System.Drawing.Point(1309, 625);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(112, 30);
             this.button6.TabIndex = 17;
             this.button6.Text = "Calculate";
             this.button6.UseVisualStyleBackColor = true;
@@ -271,10 +275,11 @@
             // comboBox3
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(172, 625);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(109, 24);
+            this.comboBox3.Size = new System.Drawing.Size(109, 33);
             this.comboBox3.TabIndex = 18;
             // 
             // Form1
