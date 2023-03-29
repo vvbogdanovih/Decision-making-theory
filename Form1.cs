@@ -87,7 +87,7 @@ namespace Decision_making_theory
             domainUpDown2.Items.Add("B");
             domainUpDown2.Items.Add("C");
             domainUpDown1.Text = "A";
-            domainUpDown2.Text = "A";
+            domainUpDown2.Text = "B";
             
 
             dataGridView1.RowHeadersVisible = false;
@@ -131,9 +131,35 @@ namespace Decision_making_theory
         // Calculate
         private void button6_Click(object sender, EventArgs e)
         {
-            int[,] matrixA = GetDataGridViewData(dataGridView1);
-            int[,] matrixB = GetDataGridViewData(dataGridView2);            
-            
+            int[,] matrixA = null;
+            int[,] matrixB = null;
+            switch (domainUpDown1.Text)
+            {
+                case "A":
+                    matrixA = GetDataGridViewData(dataGridView1);
+                    break;
+                case "B":
+                    matrixA = GetDataGridViewData(dataGridView2);
+                    break;
+                case "C":
+                    matrixA = GetDataGridViewData(dataGridView3);
+                    break;
+            }
+            switch (domainUpDown2.Text)
+            {
+                case "A":
+                    matrixB = GetDataGridViewData(dataGridView1);
+                    break;
+                case "B":
+                    matrixB = GetDataGridViewData(dataGridView2);
+                    break;
+                case "C":
+                    matrixB = GetDataGridViewData(dataGridView3);
+                    break;
+            }
+
+
+
             switch (comboBox2.Text)
             {
                 case "Перетин":

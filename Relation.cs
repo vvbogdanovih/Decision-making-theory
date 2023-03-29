@@ -223,6 +223,7 @@ namespace Decision_making_theory
             return _resultMatrix;
         }
 
+        
         // Lab2
         public static bool isReflective(int[,] matrix)
         {
@@ -348,6 +349,7 @@ namespace Decision_making_theory
         public static int[,] Attainability(int[,] matrix) => Union(GetEMatrix(matrix.GetLength(0)), TransitiveClosure(matrix));
         public static int[,] MutualAttainability(int[,] matrix) => Intersection(Attainability(matrix), InverseMatrix(Attainability(matrix)));
 
+        //Lab3
 
 
     }
