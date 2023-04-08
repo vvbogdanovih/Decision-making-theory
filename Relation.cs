@@ -391,7 +391,7 @@ namespace Decision_making_theory
                 }
             }
             return true;
-        }
+        }        
         public static int[,] IntersectionM(int[,] matrixP, int[,] matrixQ)
         {
             int[,] temp1 = matrixP;
@@ -456,7 +456,50 @@ namespace Decision_making_theory
                 }
             }return Composition(R1, R2);
         }
-
+        public static bool isCoherent(int[,] matrix)
+        {
+            for(int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for(int j=0; j < matrix.GetLength(0); j++)
+                {
+                    if (matrix[i, j] != matrix[j,i]) return false;
+                }
+            }return true;
+        }
+        public static bool isAdditiveTransitiveM(int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int k = 0; k < matrix.GetLength(0); k++)
+                {
+                    for (int j = 0; j < matrix.GetLength(0); j++)
+                    {
+                        if (matrix[i, j] != 0 && matrix[j, k] != 0)
+                        {
+                            if (!(matrix[i, k] != 0 && (matrix[i, j] + matrix[j, k]) != matrix[i, k])) return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        public static bool isMultiplicativeTransitiveM(int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int k = 0; k < matrix.GetLength(0); k++)
+                {
+                    for (int j = 0; j < matrix.GetLength(0); j++)
+                    {
+                        if (matrix[i, j] != 0 && matrix[j, k] != 0)
+                        {
+                            if (!(matrix[i, k] != 0 && (matrix[i, j] - matrix[j, k]) == matrix[i, k])) return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
 
     }
 }
