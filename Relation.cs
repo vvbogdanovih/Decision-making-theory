@@ -428,6 +428,35 @@ namespace Decision_making_theory
             }
             return Union(temp1,temp2);
         }
+        public static int[,] SubtractionM(int[,] matrixP, int[,] matrixQ) => matrixP;
+        public static int[,] CompositionM(int[,] matrixP, int[,] matrixQ)
+        {
+            int[,] R1 = matrixP;
+            int[,] R2 = matrixQ;
+            int temp1 = 0;
+            int temp2 = 1;
+
+            for (int i = 0; i < matrixP.GetLength(0); i++)
+            {
+                for (int k = 0; k < matrixP.GetLength(0); k++)
+                {
+                    for (int j = 0; j < matrixP.GetLength(0); j++)
+                    {
+                        temp1 += matrixP[i, j] + matrixQ[i, j];
+                        temp1 /= 5;
+                        R1[i, j] = temp1;
+                        
+                        temp2 *= matrixP[i, j] * matrixQ[i, j];
+                        temp2 = (int)Math.Pow(temp2, 1.0 / matrixP.GetLength(0));
+                        R2[i, j] = temp2;
+
+                        temp1 = 0;
+                        temp2 = 1;
+                    }
+                }
+            }return Composition(R1, R2);
+        }
+
 
     }
 }
