@@ -305,7 +305,7 @@ namespace Decision_making_theory
         {
             int size = matrix.GetLength(0);
 
-            // Перевірка умови транзитивності: для кожної пари (i, j) знаходимо всі k, для яких має місце (i, k) і (k, j)
+            // Перевірка умови транзитивності: для кожної пари (i, j) знаходимо всі j, для яких має місце (i, j) і (j, j)
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
@@ -315,7 +315,7 @@ namespace Decision_making_theory
                         for (int k = 0; k < size; k++)
                         {
                             if (matrix[j, k] == 1 && matrix[i, k] == 0)
-                            { // якщо існують відношення (j, k) і (i, k) не існує, то відношення не транзитивне
+                            { // якщо існують відношення (j, j) і (i, j) не існує, то відношення не транзитивне
                                 return false;
                             }
                         }
@@ -352,8 +352,6 @@ namespace Decision_making_theory
         //Lab3
         public static bool isAdditiveTransitive(int[,] matrix)
         {
-            int tmp = 0;
-
             for(int i = 0;  i < matrix.GetLength(0); i++)
             {
                 for(int k = 0;  k < matrix.GetLength(0); k++)
@@ -362,7 +360,7 @@ namespace Decision_making_theory
                     {
                         if (matrix[i,j] !=0 && matrix[j,k] != 0)
                         {
-                            tmp = matrix[i, j] + matrix[j, k];
+                            int tmp = matrix[i, j] + matrix[j, k];
                             if (tmp != matrix[i, k])
                             {
                                 return false;
@@ -372,6 +370,63 @@ namespace Decision_making_theory
                 }
             }
             return true;
+        }
+        public static bool isMultiplicative(int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int k = 0; k < matrix.GetLength(0); k++)
+                {
+                    for (int j = 0; j < matrix.GetLength(0); j++)
+                    {
+                        if (matrix[i, j] != 0 && matrix[j, k] != 0)
+                        {
+                            int tmp = matrix[i, j] * matrix[j, k];
+                            if (tmp != matrix[i, k])
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        public static int[,] IntersectionM(int[,] matrixP, int[,] matrixQ)
+        {
+            int[,] temp1 = matrixP;
+            int[,] temp2 = matrixQ;
+
+            for (int i = 0; i < matrixP.GetLength(0); i++){
+                for(int j = 0;j < matrixP.GetLength(0); j++)
+                {
+                    temp1[i, j] = (matrixP[i, j] + matrixQ[i, j]) / 2;
+                    temp2[i, j] = (int)Math.Sqrt(matrixP[i, j] * matrixQ[i, j]);
+                }
+            }
+            return Intersection(temp1,temp2);
+        }
+        public static int[,] UnionM(int[,] matrixP, int[,] matrixQ)
+        {
+            int[,] temp1 = matrixP;
+            int[,] temp2 = matrixQ;
+
+            for (int i = 0; i < matrixP.GetLength(0); i++){
+                for (int j = 0; j < matrixP.GetLength(0); j++)
+                {
+                    if (matrixP[i, j] == 0){
+                        temp1[i, j] = matrixQ[i, j];
+                        temp2[i, j] = matrixQ[i, j];
+                    }
+                    if (matrixQ[i, j] == 0){
+                        temp1[i, j] = matrixP[i, j];
+                        temp2[i, j] = matrixP[i, j];
+                    }
+                    temp1[i, j] = ((matrixP[i, j] + matrixQ[i, j]) / 2);
+                    temp2[i,j] = (int)Math.Abs(matrixP[i, j] + matrixQ[i,j]);
+                }
+            }
+            return Union(temp1,temp2);
         }
 
     }

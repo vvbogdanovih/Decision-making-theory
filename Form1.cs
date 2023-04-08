@@ -129,6 +129,8 @@ namespace Decision_making_theory
 
             // Lab3
             comboBox2.Items.Add("Адитивно транзитивне");
+            comboBox2.Items.Add("Мультиплікативність");
+            comboBox2.Items.Add("Перетин Метризованих");
 
             comboBox2.Text = "Перетин";
         }
@@ -243,9 +245,17 @@ namespace Decision_making_theory
                     SetDataGridViewData(dataGridView4, Relation.MutualAttainability(matrixA));
                     break;
                 case "Адитивно транзитивне":
-                        ShowAnswer(Relation.isAdditiveTransitive(matrixA));
+                    ShowAnswer(Relation.isAdditiveTransitive(matrixA));
+                    break;
+                case "Мультиплікативність":
+                    ShowAnswer(Relation.isMultiplicative(matrixA));
+                    break;
+                case "Перетин Метризованих":
+                    SetDataGridViewData(dataGridView4, Relation.IntersectionM(matrixA, matrixB));
                     break;
 
+
+                
                 default: MessageBox.Show("Wrong argument!");
                     break;
 
