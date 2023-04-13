@@ -493,7 +493,7 @@ namespace Decision_making_theory
                     {
                         if (matrix[i, j] != 0 && matrix[j, k] != 0)
                         {
-                            if (!(matrix[i, k] != 0 && (matrix[i, j] - matrix[j, k]) == matrix[i, k])) return false;
+                            if (!(matrix[i, k] != 0 && (matrix[i, j] * matrix[j, k]) == matrix[i, k])) return false;
                         }
                     }
                 }
