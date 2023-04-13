@@ -466,7 +466,7 @@ namespace Decision_making_theory
                 }
             }return true;
         }
-        public static bool isAdditiveTransitiveM(int[,] matrix)
+        public static bool isAdditiveM(int[,] matrix)
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
             {

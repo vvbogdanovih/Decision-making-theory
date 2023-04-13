@@ -131,6 +131,12 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Адитивно транзитивне");
             comboBox2.Items.Add("Мультиплікативність");
             comboBox2.Items.Add("Перетин Метризованих");
+            comboBox2.Items.Add("Об'єднання Метризованих");
+            comboBox2.Items.Add("Різниця Метризованих");
+            comboBox2.Items.Add("Композиція Метризованих");
+            comboBox2.Items.Add("Узгодженість Метризованих");
+            comboBox2.Items.Add("Адитивність Метризованих");
+            comboBox2.Items.Add("Мультиплікативно транзитвне Метризованих");
 
             comboBox2.Text = "Перетин";
         }
@@ -166,7 +172,7 @@ namespace Decision_making_theory
             }
 
 
-            if (comboBox2.Text != "------------------------------------------------")
+            if (comboBox2.Text != "------------------------------------------------") ;
             switch (comboBox2.Text)
             {
                 case "Перетин":
@@ -253,9 +259,24 @@ namespace Decision_making_theory
                 case "Перетин Метризованих":
                     SetDataGridViewData(dataGridView4, Relation.IntersectionM(matrixA, matrixB));
                     break;
-
-
-                
+                case "Об'єднання Метризованих":
+                    SetDataGridViewData(dataGridView4, Relation.UnionM(matrixA, matrixB));
+                    break;
+                case "Різниця Метризованих":
+                    SetDataGridViewData(dataGridView4, Relation.SubtractionM(matrixA, matrixB));
+                    break;
+                case "Композиція Метризованих":
+                    SetDataGridViewData(dataGridView4, Relation.CompositionM(matrixA, matrixB));
+                    break;
+                case "Узгодженість Метризованих":
+                    ShowAnswer(Relation.isCoherent(matrixA));
+                    break;
+                case "Адитивність Метризованих":
+                    ShowAnswer(Relation.isAdditiveM(matrixA));
+                    break;
+                case "Мультиплікативно транзитвне Метризованих":
+                    ShowAnswer(Relation.isMultiplicativeTransitiveM(matrixA));
+                    break;
                 default: MessageBox.Show("Wrong argument!");
                     break;
 
