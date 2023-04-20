@@ -128,14 +128,14 @@ namespace Decision_making_theory
             comboBox2.Items.Add("------------------------------------------------");
 
             // Lab3
-            comboBox2.Items.Add("Адитивно транзитивне");
+            comboBox2.Items.Add("Адитивність");
             comboBox2.Items.Add("Мультиплікативність");
             comboBox2.Items.Add("Перетин Метризованих");
             comboBox2.Items.Add("Об'єднання Метризованих");
             comboBox2.Items.Add("Різниця Метризованих");
             comboBox2.Items.Add("Композиція Метризованих");
             comboBox2.Items.Add("Узгодженість Метризованих");
-            comboBox2.Items.Add("Адитивність Метризованих");
+            comboBox2.Items.Add("Адитивно Транзитивне Метризованих");
             comboBox2.Items.Add("Мультиплікативно транзитвне Метризованих");
 
             comboBox2.Text = "Перетин";
@@ -250,8 +250,8 @@ namespace Decision_making_theory
                 case "Взаємна досяжність":
                     SetDataGridViewData(dataGridView4, Relation.MutualAttainability(matrixA));
                     break;
-                case "Адитивно транзитивне":
-                    ShowAnswer(Relation.isAdditiveTransitive(matrixA));
+                case "Адитивність":
+                    ShowAnswer(Relation.isAdditive(matrixA));
                     break;
                 case "Мультиплікативність":
                     ShowAnswer(Relation.isMultiplicative(matrixA));
@@ -271,8 +271,8 @@ namespace Decision_making_theory
                 case "Узгодженість Метризованих":
                     ShowAnswer(Relation.isCoherent(matrixA));
                     break;
-                case "Адитивність Метризованих":
-                    ShowAnswer(Relation.isAdditiveM(matrixA));
+                case "Адитивно Транзитивне Метризованих":
+                    ShowAnswer(Relation.isAdditiveTransitiveM(matrixA));
                     break;
                 case "Мультиплікативно транзитвне Метризованих":
                     ShowAnswer(Relation.isMultiplicativeTransitiveM(matrixA));
