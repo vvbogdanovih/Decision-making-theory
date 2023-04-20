@@ -350,7 +350,7 @@ namespace Decision_making_theory
         public static int[,] MutualAttainability(int[,] matrix) => Intersection(Attainability(matrix), InverseMatrix(Attainability(matrix)));
 
         //Lab3
-        public static bool isAdditiveTransitive(int[,] matrix)
+        public static bool isAdditive(int[,] matrix)
         {
             for(int i = 0;  i < matrix.GetLength(0); i++)
             {
@@ -394,67 +394,91 @@ namespace Decision_making_theory
         }        
         public static int[,] IntersectionM(int[,] matrixP, int[,] matrixQ)
         {
-            int[,] temp1 = matrixP;
-            int[,] temp2 = matrixQ;
+            int[,] temp1 = matrixP;            
+
+            if (isAdditive(matrixP)){
+                for (int i = 0; i < matrixP.GetLength(0); i++){
+                    for (int j = 0; j < matrixP.GetLength(0); j++){
+                        temp1[i, j] = (matrixP[i, j] + matrixQ[i, j]) / 2;                        
+                    }
+                }
+                return temp1;
+            }
 
             for (int i = 0; i < matrixP.GetLength(0); i++){
-                for(int j = 0;j < matrixP.GetLength(0); j++)
-                {
-                    temp1[i, j] = (matrixP[i, j] + matrixQ[i, j]) / 2;
-                    temp2[i, j] = (int)Math.Sqrt(matrixP[i, j] * matrixQ[i, j]);
+                for (int j = 0; j < matrixP.GetLength(0); j++){
+                    temp1[i, j] = (int)Math.Sqrt(matrixP[i, j] * matrixQ[i, j]);
                 }
             }
-            return Intersection(temp1,temp2);
+            return temp1;
         }
         public static int[,] UnionM(int[,] matrixP, int[,] matrixQ)
         {
             int[,] temp1 = matrixP;
-            int[,] temp2 = matrixQ;
+
+            if (isAdditive(matrixP))
+            {
+                for (int i = 0; i < matrixP.GetLength(0); i++){
+                    for (int j = 0; j < matrixP.GetLength(0); j++){
+                        if (matrixP[i, j] == 0){
+                            temp1[i, j] = matrixQ[i, j];                            
+                        }
+                        if (matrixQ[i, j] == 0){
+                            temp1[i, j] = matrixP[i, j];                            
+                        }
+                        temp1[i, j] = ((matrixP[i, j] + matrixQ[i, j]) / 2);                        
+                    }
+                }
+                return temp1;
+            }
 
             for (int i = 0; i < matrixP.GetLength(0); i++){
-                for (int j = 0; j < matrixP.GetLength(0); j++)
-                {
+                for (int j = 0; j < matrixP.GetLength(0); j++){
                     if (matrixP[i, j] == 0){
                         temp1[i, j] = matrixQ[i, j];
-                        temp2[i, j] = matrixQ[i, j];
                     }
                     if (matrixQ[i, j] == 0){
                         temp1[i, j] = matrixP[i, j];
-                        temp2[i, j] = matrixP[i, j];
-                    }
-                    temp1[i, j] = ((matrixP[i, j] + matrixQ[i, j]) / 2);
-                    temp2[i,j] = (int)Math.Abs(matrixP[i, j] + matrixQ[i,j]);
+                    }                    
+                    temp1[i, j] = (int)Math.Abs(matrixP[i, j] + matrixQ[i, j]);
                 }
             }
-            return Union(temp1,temp2);
+            return temp1;
         }
         public static int[,] SubtractionM(int[,] matrixP, int[,] matrixQ) => matrixP;
         public static int[,] CompositionM(int[,] matrixP, int[,] matrixQ)
         {
             int[,] R1 = matrixP;
-            int[,] R2 = matrixQ;
-            int temp1 = 0;
-            int temp2 = 1;
+            int temp1 = 1;
 
-            for (int i = 0; i < matrixP.GetLength(0); i++)
+            if (isAdditive(matrixP))
             {
-                for (int k = 0; k < matrixP.GetLength(0); k++)
-                {
-                    for (int j = 0; j < matrixP.GetLength(0); j++)
-                    {
-                        temp1 += matrixP[i, j] + matrixQ[i, j];
-                        temp1 /= 5;
-                        R1[i, j] = temp1;
-                        
-                        temp2 *= matrixP[i, j] * matrixQ[i, j];
-                        temp2 = (int)Math.Pow(temp2, 1.0 / matrixP.GetLength(0));
-                        R2[i, j] = temp2;
-
-                        temp1 = 0;
-                        temp2 = 1;
+                temp1 = 0;
+                for (int i = 0; i < matrixP.GetLength(0); i++){
+                    for (int k = 0; k < matrixP.GetLength(0); k++){
+                        for (int j = 0; j < matrixP.GetLength(0); j++){
+                            temp1 += matrixP[i, j] + matrixQ[i, j];
+                            temp1 /= 5;
+                            R1[i, j] = temp1;
+                            temp1 = 0;
+                        }
                     }
                 }
-            }return Composition(R1, R2);
+                return R1;
+            }
+            for (int i = 0; i < matrixP.GetLength(0); i++){
+                for (int k = 0; k < matrixP.GetLength(0); k++){
+                    for (int j = 0; j < matrixP.GetLength(0); j++){
+                        temp1 *= matrixP[i, j] * matrixQ[i, j];
+                        temp1 = (int)Math.Pow(temp1, 1.0 / matrixP.GetLength(0));
+                        R1[i, j] = temp1;
+
+                        temp1 = 1;
+                    }
+                }
+            }
+
+            return R1;
         }
         public static bool isCoherent(int[,] matrix)
         {
@@ -466,7 +490,7 @@ namespace Decision_making_theory
                 }
             }return true;
         }
-        public static bool isAdditiveM(int[,] matrix)
+        public static bool isAdditiveTransitiveM(int[,] matrix)
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
             {

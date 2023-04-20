@@ -257,16 +257,19 @@ namespace Decision_making_theory
                     ShowAnswer(Relation.isMultiplicative(matrixA));
                     break;
                 case "Перетин Метризованих":
-                    SetDataGridViewData(dataGridView4, Relation.IntersectionM(matrixA, matrixB));
+                    if(!(Relation.isAdditive(matrixA) ^ Relation.isAdditive(matrixB))) SetDataGridViewData(dataGridView4, Relation.IntersectionM(matrixA, matrixB));
+                    else MessageBox.Show("Всі відномшення повинні бути\nАдитивними або Мультиплікативними");
                     break;
                 case "Об'єднання Метризованих":
-                    SetDataGridViewData(dataGridView4, Relation.UnionM(matrixA, matrixB));
+                    if (!(Relation.isAdditive(matrixA) ^ Relation.isAdditive(matrixB))) SetDataGridViewData(dataGridView4, Relation.UnionM(matrixA, matrixB));
+                    else MessageBox.Show("Всі відномшення повинні бути\nАдитивними або Мультиплікативними");                    
                     break;
                 case "Різниця Метризованих":
                     SetDataGridViewData(dataGridView4, Relation.SubtractionM(matrixA, matrixB));
                     break;
                 case "Композиція Метризованих":
-                    SetDataGridViewData(dataGridView4, Relation.CompositionM(matrixA, matrixB));
+                    if (!(Relation.isAdditive(matrixA) ^ Relation.isAdditive(matrixB))) SetDataGridViewData(dataGridView4, Relation.CompositionM(matrixA, matrixB));
+                    else MessageBox.Show("Всі відномшення повинні бути\nАдитивними або Мультиплікативними");                    
                     break;
                 case "Узгодженість Метризованих":
                     ShowAnswer(Relation.isCoherent(matrixA));
