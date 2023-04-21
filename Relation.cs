@@ -426,7 +426,11 @@ namespace Decision_making_theory
                         if (matrixQ[i, j] == 0){
                             temp1[i, j] = matrixP[i, j];                            
                         }
-                        temp1[i, j] = ((matrixP[i, j] + matrixQ[i, j]) / 2);                        
+                        else
+                        {
+                            temp1[i, j] = ((matrixP[i, j] + matrixQ[i, j]) / 2);
+                        }
+                                               
                     }
                 }
                 return temp1;
@@ -439,8 +443,12 @@ namespace Decision_making_theory
                     }
                     if (matrixQ[i, j] == 0){
                         temp1[i, j] = matrixP[i, j];
-                    }                    
-                    temp1[i, j] = (int)Math.Abs(matrixP[i, j] + matrixQ[i, j]);
+                    }
+                    else
+                    {
+                        temp1[i, j] = (int)Math.Abs(matrixP[i, j] + matrixQ[i, j]);
+                    }
+                    
                 }
             }
             return temp1;
@@ -458,7 +466,7 @@ namespace Decision_making_theory
                     for (int k = 0; k < matrixP.GetLength(0); k++){
                         for (int j = 0; j < matrixP.GetLength(0); j++){
                             temp1 += matrixP[i, j] + matrixQ[i, j];
-                            temp1 /= 5;
+                            temp1 /= matrixP.GetLength(0);
                             R1[i, j] = temp1;
                             temp1 = 0;
                         }
