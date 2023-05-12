@@ -349,7 +349,7 @@ namespace Decision_making_theory
         public static int[,] Attainability(int[,] matrix) => Union(GetEMatrix(matrix.GetLength(0)), TransitiveClosure(matrix));
         public static int[,] MutualAttainability(int[,] matrix) => Intersection(Attainability(matrix), InverseMatrix(Attainability(matrix)));
 
-        //Lab3
+        // Lab3
         public static bool isAdditive(int[,] matrix)
         {
             for(int i = 0;  i < matrix.GetLength(0); i++)
@@ -533,5 +533,184 @@ namespace Decision_making_theory
             return true;
         }
 
+        // Lab4
+        public static int MeasureOfCloseness(int[,] matrixA, int[,] matrixB)
+        {
+            int sum = 0;
+            
+            for(int i = 0; i < matrixA.GetLength(0); i++)
+            {
+                for(int j = 0; j < matrixA.GetLength(0); j++)
+                {
+                    sum += Math.Abs(matrixA[i, j] - matrixB[i, j]);
+                }
+            }
+
+            return sum/2;
+        }
+        public static int[,] MeasureOfClosenessM(int[,] matrixA, int[,] matrixB)
+        {
+            _resultMatrix = new int[matrixA.GetLength(0), matrixA.GetLength(0)];
+            for (int i = 0; i < matrixA.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrixA.GetLength(0); j++)
+                {
+                    if ((matrixA[i, j] != 999999 && matrixB[i, j] != 999999)) _resultMatrix[i, j] = Math.Abs(matrixA[i, j] - matrixB[i, j]);
+                    else if (matrixA[i, j] != 999999) _resultMatrix[i, j] = 0;
+                    else _resultMatrix[i, j] = 999999;
+                }
+            }
+            return _resultMatrix;
+        }
+
+
+        // Lab5
+        public static string HasMaximum(int[,] matrix)
+        {
+            string res = "";
+
+            for (int i = 0; i < matrix.GetLength(0); i++){
+                for (int j = 0; j < matrix.GetLength(1); j++){
+                    if (matrix[i, j] != 1) break;
+                    if(j == matrix.GetLength(0)-1) res += $"d {i + 1} - максимум\n";
+                }
+            }
+            return res.Length > 0 ? res : "Максимум відсутній!";
+        }
+        public static string HasMinorant(int[,] matrix)
+        {
+            string res = "";
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[i, j] != 0) break;
+                    if (j == matrix.GetLength(0) - 1) res += $"d {i + 1} - мінорант\n";
+                }
+            }
+            return res.Length > 0 ? res : "Мінорант відсутній!";
+        }
+        public static string HasMinimum(int[,] matrix)
+        {
+            string res = "";
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[j, i] != 1) break;
+                    if (j == matrix.GetLength(0) - 1) res += $"d {i + 1} - мінімум\n";
+                }
+            }
+            return res.Length > 0 ? res : "Мінімум!";
+        }
+        public static string HasMajorant(int[,] matrix)
+        {
+            string res = "";
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[j, i] != 0) break;
+                    if (j == matrix.GetLength(0) - 1) res += $"d {i + 1} - мажорант\n";
+                }
+            }
+            return res.Length > 0 ? res : "Мажорант відсутній!";
+        }
+        public static int[,] Pareto(int[,] matrix)
+        {
+            _resultMatrix = matrix;
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    bool dominates = false;
+                    for (int k = 0; k < matrix.GetLength(0); k++)
+                    {
+                        if (matrix[i, k] >= matrix[j, k])
+                        {
+                            dominates = true;
+                        }
+                        else
+                        {
+                            dominates = false;
+                            break;
+                        }
+                    }
+                    if (dominates)
+                    {
+                        _resultMatrix[i, j] = 1;
+                    }
+                    else
+                    {
+                        _resultMatrix[i, j] = 0;
+                    }
+                }
+            }
+            return _resultMatrix;
+        }
+        public static int[,] Slayter(int[,] matrix)
+        {
+            _resultMatrix = matrix;
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    bool dominates = false;
+                    for (int k = 0; k < matrix.GetLength(0); k++)
+                    {
+                        if (matrix[i, k] > matrix[j, k])
+                        {
+                            dominates = true;
+                        }
+                        else
+                        {
+                            dominates = false;
+                            break;
+                        }
+                    }
+                    if (dominates)
+                    {
+                        _resultMatrix[i, j] = 1;
+                    }
+                    else
+                    {
+                        _resultMatrix[i, j] = 0;
+                    }
+                }
+            }
+            return _resultMatrix;
+        }
+        public static int[,] Etalon(int[,] matrix)
+        {           
+
+            // Обчислення di
+            int[] d = new int[4];
+            for (int i = 0; i < 3; i++)
+            {
+                int a = matrix[i, 0];
+                int b = matrix[4, 0];
+                int c = matrix[i, 1];
+                int e = matrix[4, 1];
+                int f = matrix[i, 2];
+                int g = matrix[4, 2];
+                d[i] = Math.Abs(a - b) + Math.Abs(c - e) + Math.Abs(f - g);
+            }
+
+            // Створення еталонної матриці
+            int[,] referenceMatrix = new int[4, 4];
+            for (int j = 0; j < 4; j++)
+            {
+                referenceMatrix[0, j] = (d[j] >= d[0]) ? 1 : 0;
+                referenceMatrix[1, j] = (d[j] >= d[1]) ? 1 : 0;
+                referenceMatrix[2, j] = (d[j] >= d[2]) ? 1 : 0;
+                referenceMatrix[3, j] = (d[j] >= d[3]) ? 1 : 0;
+            }
+            return referenceMatrix;
+        }
     }
+
+
 }

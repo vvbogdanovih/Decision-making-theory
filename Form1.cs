@@ -25,12 +25,18 @@ namespace Decision_making_theory
         /// </summary>
         private int [,] GetDataGridViewData(DataGridView dataGridView)
         {
+            
             int size = Convert.ToInt32(comboBox1.Text);
             int[,] matrix = new int[size, size];
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
+                    if (Convert.ToString(dataGridView.Rows[i].Cells[j].Value) == "-")
+                    {
+                        matrix[i, j] = 999999;
+                        continue;
+                    }
                     matrix[i, j] = Convert.ToInt32(dataGridView.Rows[i].Cells[j].Value);
                 }
             }
@@ -50,6 +56,11 @@ namespace Decision_making_theory
             {
                 for (int j = 0; j < size; j++)
                 {
+                    if(matrix[i, j] == 999999)
+                    {
+                        dataGridView.Rows[i].Cells[j].Value = "W";
+                        continue;
+                    }
                     dataGridView.Rows[i].Cells[j].Value = matrix[i, j];
                 }
             }
@@ -137,6 +148,20 @@ namespace Decision_making_theory
             comboBox2.Items.Add("Узгодженість Метризованих");
             comboBox2.Items.Add("Адитивно Транзитивне Метризованих");
             comboBox2.Items.Add("Мультиплікативно транзитвне Метризованих");
+            comboBox2.Items.Add("------------------------------------------------");
+
+            comboBox2.Items.Add("Міра Близькості");
+            comboBox2.Items.Add("Міра Близькості Метризованих");
+            comboBox2.Items.Add("------------------------------------------------");
+
+            // Lab 5
+            comboBox2.Items.Add("Максимум");
+            comboBox2.Items.Add("Мінорант");
+            comboBox2.Items.Add("Мінімум");
+            comboBox2.Items.Add("Мажорант");
+            comboBox2.Items.Add("Перето");
+            comboBox2.Items.Add("Слецтера");
+            comboBox2.Items.Add("За Еталоном");
 
             comboBox2.Text = "Перетин";
         }
@@ -280,6 +305,33 @@ namespace Decision_making_theory
                 case "Мультиплікативно транзитвне Метризованих":
                     ShowAnswer(Relation.isMultiplicativeTransitiveM(matrixA));
                     break;
+                case "Максимум":
+                    MessageBox.Show(Relation.HasMaximum(matrixA));
+                    break;
+                case "Мінорант":
+                    MessageBox.Show(Relation.HasMinorant(matrixA));
+                    break;
+                case "Мінімум":
+                    MessageBox.Show(Relation.HasMinimum(matrixA));
+                    break;
+                case "Мажорант":
+                    MessageBox.Show(Relation.HasMajorant(matrixA));
+                    break;
+                case "Перето":
+                    SetDataGridViewData(dataGridView4, Relation.Pareto(matrixA));
+                    break;
+                case "Слецтера":
+                    SetDataGridViewData(dataGridView4, Relation.Slayter(matrixA));
+                    break;
+                case "За Еталоном":
+                    SetDataGridViewData(dataGridView4, Relation.Etalon(matrixA));
+                    break;
+                case "Міра Близькості":
+                    MessageBox.Show(Relation.MeasureOfCloseness(matrixA, matrixB).ToString());
+                    break;
+                case "Міра Близькості Метризованих":
+                    SetDataGridViewData(dataGridView4, Relation.MeasureOfClosenessM(matrixA, matrixB));
+                    break;
                 default: MessageBox.Show("Wrong argument!");
                     break;
 
@@ -298,7 +350,6 @@ namespace Decision_making_theory
             dataGridView4.RowCount = Int32.Parse(comboBox1.Text);
             dataGridView4.ColumnCount = Int32.Parse(comboBox1.Text);
         }
-
         // Empty
         private void button1_Click(object sender, EventArgs e)
         {
